@@ -8,6 +8,7 @@ defmodule Rumbl.Multimedia do
   alias Rumbl.Repo
   alias Rumbl.Accounts.User
   alias Rumbl.Multimedia.Video
+  alias Rumbl.Multimedia.Category
 
   @doc """
   Returns the list of videos.
@@ -120,4 +121,17 @@ defmodule Rumbl.Multimedia do
     from(v in query, where: v.user_id == ^user_id)
   end
 
+  ###########
+  # Category
+  ###########
+
+  def create_category!(name) do
+    Repo.insert!(%Category{name: name}, on_conflict: :nothing)
+  end
+
+  def list_alphabetical_categories do
+    Category
+    |> Category.alphabetical()
+    |> Repo.all
+  end
 end
