@@ -6,6 +6,7 @@ defmodule Rumbl.Accounts do
   alias Rumbl.Repo
   alias Rumbl.Accounts.User
 
+
   def list_users do
     Repo.all(User)
   end
