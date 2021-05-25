@@ -109,12 +109,14 @@ defmodule Rumbl.Multimedia do
     Video
     |> user_videos_query(user)
     |> Repo.all()
+    |> Repo.preload(:category)
   end
 
   def get_user_video!(%User{} = user, id) do
     Video
     |> user_videos_query(user)
     |> Repo.get!(id)
+    |> Repo.preload(:category)
   end
 
   def user_videos_query(query, %User{id: user_id}) do
