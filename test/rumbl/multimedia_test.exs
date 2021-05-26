@@ -83,4 +83,16 @@ defmodule Rumbl.MultimediaTest do
       assert %Ecto.Changeset{} = Multimedia.change_video(video)
     end
   end
+
+  describe "permalink" do
+    alias Rumbl.Multimedia.Permalink
+
+    test "returns integer on correct format" do
+      assert Permalink.cast("12-hello-world") == {:ok, 12}
+    end
+
+    test "returns error on invalid format" do
+      assert Permalink.cast("hello-world-12") == :error
+    end
+  end
 end
