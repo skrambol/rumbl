@@ -5,3 +5,7 @@
 #msg-container {
   min-height: 260px;
 }
+
+.new {
+  color: red;
+}

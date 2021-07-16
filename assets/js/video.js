@@ -41,7 +41,7 @@ let Video = {
 
     vidChannel.on('new_annotation', resp => {
       lastSeenId = resp.id
-      this.renderAnnotation(msgContainer, resp)
+      this.renderAnnotation(msgContainer, resp, true)
     })
 
     vidChannel.join()
@@ -54,12 +54,13 @@ let Video = {
     .receive('error', reason => console.log('joined failed', reason) )
   },
 
-  renderAnnotation(msgContainer, {user, body, at}){
+  renderAnnotation(msgContainer, {user, body, at}, is_new = false){
     let template = document.createElement("div")
     template.innerHTML = `
       <a href="#" data-seek="${this.esc(at)}">
         [${this.formatTime(at)}]
       </a>
+      <span class="new">${is_new ? ' [NEW] ' : ''}</span>
       <b>${this.esc(user.username)}</b>: ${this.esc(body)}
       `
     msgContainer.appendChild(template)
